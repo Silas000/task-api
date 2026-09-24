@@ -40,7 +40,6 @@
 - [Testes](#-testes)
 - [Estrutura do projeto](#-estrutura-do-projeto)
 - [Boas práticas aplicadas](#-boas-práticas-aplicadas)
-- [Próximos passos](#-próximos-passos)
 - [Licença](#-licença)
 
 ---
