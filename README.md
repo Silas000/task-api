@@ -440,5 +440,5 @@ Este projeto está sob a licença MIT.
 
 **Seu Nome**
 
-- GitHub: [@seu-usuario](https://github.com/Silas000)
-- LinkedIn: [seu-perfil](https://linkedin.com/in/silas-rosario/)
+- GitHub: [@silas000](https://github.com/Silas000)
+- LinkedIn: [Silas Rosário](https://linkedin.com/in/silas-rosario/)
