@@ -1,0 +1,84 @@
+# =========================================================
+# ESCALARES
+# =========================================================
+
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+# =========================================================
+# TIPOS
+# =========================================================
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    tasks: [Task!]! @hasMany
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Task {
+    id: ID!
+    user_id: ID!
+    title: String!
+    description: String
+    completed: Boolean!
+    user: User! @belongsTo
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+# =========================================================
+# INPUTS
+# =========================================================
+
+input TaskInput {
+    title: String! @rules(apply: ["required", "string", "max:255"])
+    description: String @rules(apply: ["nullable", "string"])
+    completed: Boolean
+}
+
+input TaskUpdateInput {
+    title: String @rules(apply: ["sometimes", "string", "max:255"])
+    description: String @rules(apply: ["nullable", "string"])
+    completed: Boolean
+}
+
+# =========================================================
+# QUERIES
+# =========================================================
+
+type Query @guard(with: ["sanctum"]) {
+    "Retorna o usuário autenticado"
+    me: User @auth
+
+    "Lista todos os usuários"
+    users: [User!]! @all
+
+    "Retorna um usuário específico pelo ID"
+    user(id: ID! @eq): User @find
+
+    "Lista todas as tarefas"
+    tasks: [Task!]! @all
+
+    "Retorna uma tarefa específica pelo ID"
+    task(id: ID! @eq): Task @find
+}
+
+# =========================================================
+# MUTATIONS
+# =========================================================
+
+type Mutation @guard(with: ["sanctum"]) {
+    "Cria uma nova tarefa para o usuário autenticado"
+    createTask(input: TaskInput! @spread): Task
+        @field(resolver: "App\\GraphQL\\Mutations\\CreateTask")
+
+    "Atualiza uma tarefa existente (apenas o dono)"
+    updateTask(id: ID!, input: TaskUpdateInput! @spread): Task
+        @field(resolver: "App\\GraphQL\\Mutations\\UpdateTask")
+
+    "Remove uma tarefa (apenas o dono)"
+    deleteTask(id: ID!): Task
+        @field(resolver: "App\\GraphQL\\Mutations\\DeleteTask")
+}
