@@ -431,20 +431,6 @@ task-api/
 
 ---
 
-## 🚧 Próximos passos
-
-- [ ] Implementar `TaskPolicy` para autorização idiomática
-- [ ] Adicionar testes de GraphQL
-- [ ] Implementar paginação nas listagens
-- [ ] Adicionar filtros e ordenação
-- [ ] Configurar CI com GitHub Actions
-- [ ] Adicionar Docker Compose
-- [ ] Implementar refresh tokens com expiração
-- [ ] Adicionar soft deletes
-- [ ] Rate limiting por usuário
-
----
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT.
