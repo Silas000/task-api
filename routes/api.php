@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +20,10 @@ Route::post('/login', [AuthController::class, 'login']);
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Rota padrão do Sanctum (retorna o usuário autenticado)
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    // Dados do usuário autenticado
+    Route::get('/user', [AuthController::class, 'me']);
 
-    // Logout
+    // Logout (revoga o token atual)
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // CRUD REST de Tarefas
